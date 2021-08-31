@@ -1,5 +1,4 @@
 import dataEntity.GamePost;
-import dataEntity.GameResponse;
 import dataEntity.ResponseItem;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -10,6 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.*;
+import static org.apache.http.HttpStatus.SC_OK;
 
 
 public class API {
@@ -46,14 +46,14 @@ public class API {
     @Test
     public void createGame() {
         GamePost gamePost = new GamePost
-                (75, "The Sims4", "2014", 150, "Strategy", "Best");
+                (79, "The Sims4", "2014", 150, "Strategy", "Best");
         given()
                 .body(gamePost)
                 .when()
-                .spec(requestSpecification)
-                .post("videogames/")
+                .post("http://localhost:8080/app/videogames/")
                 .then()
                 .assertThat()
+                .statusCode(SC_OK)
                 .log()
                 .body();
     }
@@ -84,7 +84,7 @@ public class API {
                 .put("http://localhost:8080/app/videogames/" + gameId)
                 .then()
                 .assertThat()
-                .statusCode(HttpStatus.SC_OK)
+                .statusCode(SC_OK)
                 .log()
                 .body();
     }
