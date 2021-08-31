@@ -3,7 +3,6 @@ import dataEntity.ResponseItem;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.response.Response;
-import org.apache.http.HttpStatus;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -27,7 +26,6 @@ public class API {
     public void responseSpecification() {
         responseSpecification = new ResponseSpecBuilder()
                 .expectResponseTime(Matchers.lessThan(9000L))
-                //.expectStatusCode(200)
                 .build();
     }
 
